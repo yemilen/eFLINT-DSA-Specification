@@ -5,4 +5,6 @@ and simulation. Moreover, the specifications can be used to develop regulatory s
 
 grant_access - this policy says that Alice can be granted access to a dataset if Alice is a member of the consortium and has the right to access datasetA.
 
-transfer_and_read_1 -  This policy specifies an agreement between companyX and companyY to transfer the ownership of dataset D1 from companyX to companyY
+transfer_and_read_1 -  This policy specifies an agreement between companyX and companyY to transfer the ownership of dataset D1 from companyX to companyY.
+
+access_purpose1 - This policy says that Alice can grant access to BOB if BOB holds the role "reasearcher" and the purpose for which he requested access is "genetics".
