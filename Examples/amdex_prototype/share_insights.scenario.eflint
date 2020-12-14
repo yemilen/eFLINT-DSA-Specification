@@ -1,6 +1,6 @@
 #include "request_policy.eflint".
 
-+request(Chloe, PythonScript, Research).                      // instantiate the transaction policy
+request_insights(Chloe, PythonScript, Research).              // instantiate the transaction policy
 accept_request(producer=Peter).                               // Peter accepts the request
 ?Holds(share_insights_obligation(producer=Peter)).            // obligation to share insights holds
 ?Not(Violated(share_insights_obligation(producer=Peter))).    // but is not yet violated
