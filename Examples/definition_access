@@ -1,0 +1,24 @@
+Fact data
+Fact datasets
+Fact address
+Fact project
+Fact pproposal
+Fact ecommittee
+Fact researcher Identified by role * project
+Fact lapproval
+  Holds when ()
+Fact controller
+Fact thirdparty //needs some sort of identifier
+Fact finding
+Fact purpose Identified by project
+Fact eligible_purpose Identified by purpose * project
+
+
+
+Act access
+  Actor researcher
+  Recipient dipg
+  Related to dataset, project
+  Conditioned by (Exists ) // there are about  8 conditions listed
+  Conditioned by
+  creates
