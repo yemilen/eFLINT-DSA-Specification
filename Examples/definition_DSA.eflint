@@ -1,0 +1,16 @@
+Fact access Identified by researcher * project * dataset
+Fact coded Identified by actual_dataset
+Fact data
+Fact dataset 
+Fact actual_dataset 
+Fact donor Identified by String
+Fact dcog Identified by DCOG
+Fact ecommittee Identified by EC
+Fact findings Identified by data * project
+Fact member // institutes are members
+Fact country
+Fact country_of Identified by member * country 
+Fact coordinator Identified by member // coordinator of the country in which they resides
+Fact project 
+Fact proposal Identified by purpose // proposal is always for a project
+Fact researcher 
