@@ -1,0 +1,81 @@
+Fact data
+Fact dataset
+Fact researcher
+Fact member // institutes are members
+Fact controller identified by researcher
+Fact ecommittee Identified by EC
+Fact project
+Fact proposal Identified by purpose // proposal is always for a project
+Fact access Identified by researcher * project * dataset
+Fact dcog Identified by DCOG
+Fact dipg Identified by DIPG
+Fact purpose
+Fact eligible-access Identified by dataset * purpose
+Fact thirdparty
+Fact consent Identified by purpose * ecommittee * researcher // I am not sure if thirdparty is mentioned in this consent
+//Fact ecommittee-consent
+
+Act project_approval // when a project is approved, it creates a letter of apporval
+  Actor dipg
+  Recipient researcher
+  Related to project, proposal
+  creates letter-of-apporval()
+  Holds when (Exists member, proposal)
+
+Act letter-of-apporval // letter of approval is sent to confirm project proposal approval
+  Actor dipg
+  Recipient researcher
+  Related to proposal
+  creates send-dataset()
+  Holds when // signed by researcher
+
+Act send-dataset // when letter of approval is sent back with a signature then data is sent/made available
+  Actor dipg
+  Recipient researcher
+  Related to purpose, project
+  creates access ()
+  Holds when (Exists letter-of-approval())
+
+Act access // researcher access the dataset
+  Actor researcher
+  Recipient dipg
+  Related to dataset
+  Creates track-usage()
+  Holds when // not sure
+
+Act track-usage() // dipg tracks the usage of the dataset
+  Actor dipg
+  Recipient researcher
+  Related to purpose
+  Creates usage-for-purpose-duty()
+
+Duty usage-for-purpose-duty() // duty for the researcher to use data according to purpose
+  Holder researcher
+  Claimant dipg
+  Related to access
+  Violated when (Exists !eligible-purpose())
+
+Act terminate-access // when the duty is violated, dipg terminates access of the researcher
+  Actor dipg
+  Recipient researcher
+  Related to access
+  Terminates usage-for-purpose-duty(), access()
+
+Act share-thirdparty // sharing data to third party creates the duty that the researcher collect consent from EC
+  Actor researcher
+  Recipient thirdparty
+  Related to usage-for-purpose()
+  Creates show-consent-duty()
+  Holds when consent()
+
+Duty show-consent-duty //
+  Holder researcher
+  Claimant dipg
+  Related to thirdparty
+  Violated when !consent()
+
+Act terminate-access // violating the previous duty causes dipg to terminate access
+  Actor dipg
+  Recipient researcher
+  Related to thirdparty
+  Terminates show-consent-duty(), access()
