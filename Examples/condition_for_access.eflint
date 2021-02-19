@@ -1,11 +1,14 @@
 Fact data
 Fact dataset
-Fact researcher
+Fact person 
+Fact researcher Derived from person When affiliated-with(person, member)
+                                                 ,member
+Fact affiliated-with Identified by person * member
 Fact member // institutes are members
-Fact controller identified by researcher
+Fact controller Identified by researcher
 Fact ecommittee Identified by EC
 Fact project
-Fact proposal Identified by purpose // proposal is always for a project
+Fact proposal Identified by purpose * project // proposal is always for a project
 Fact access Identified by researcher * project * dataset
 Fact dcog Identified by DCOG
 Fact dipg Identified by DIPG
@@ -15,14 +18,21 @@ Fact thirdparty
 Fact consent Identified by purpose * ecommittee * researcher // I am not sure if thirdparty is mentioned in this consent
 //Fact ecommittee-consent
 
-Act project_approval // when a project is approved, it creates a letter of apporval
-  Actor dipg
+Act send-proposal 
+  Actor researcher
+  Recipient ecommittee
+  Related to project, purpose
+  Creates proposal(purpose, project)
+  Holds when researcher && ecommittee
+  
+Act approve-proposal // when a project is approved, it creates a letter of apporval
+  Actor ecommittee
   Recipient researcher
-  Related to project, proposal
-  creates letter-of-apporval()
-  Holds when (Exists member, proposal)
+  Related to project
+  creates send-letter-of-apporval()
+  Holds when member, proposal
 
-Act letter-of-apporval // letter of approval is sent to confirm project proposal approval
+Act send-letter-of-apporval // letter of approval is sent to confirm project proposal approval
   Actor dipg
   Recipient researcher
   Related to proposal
