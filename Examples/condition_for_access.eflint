@@ -110,14 +110,14 @@ Act terminate-access // violating the previous duty causes dipg to terminate acc
   Related to thirdparty
   Terminates show-consent-duty(), access()
 
-Act make_data_available  // this is the act of assigning the permission to make data available
+Act make_data_available  // permission to transfer from member to DIPG reigstry 
   Actor dipg
   Recipient member
   Related to project
-  Creates transfer-dataset-coded-duty()
+  Creates transfer-dataset()
   Holds when member, proposal
 
-Act transfer-dataset // the act itself
+Act transfer-dataset // the act of transfering the dataset
   Actor member
   Recipient dipg
   Related to dataset
