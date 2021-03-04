@@ -1,0 +1,16 @@
+#include "gdpr/ontology.eflint".
+
+Act give-consent
+  Actor subject
+  Recipient controller
+  Related to purpose
+  Creates consent()
+  Holds when !consent()
+
+Act collect-personal-data
+  Actor controller
+  Recipient subject
+  Related to data, processor, purpose 
+    When subject-of()
+  Creates processes()
+  Holds when consent() && accurate-for-purpose()

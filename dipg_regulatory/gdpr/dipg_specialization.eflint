@@ -1,0 +1,8 @@
+#include "terms.eflint".
+#include "gdpr/consent.eflint".
+
+Fact controller Derived from member
+Fact processor Derived from dcog
+Fact subject Derived from donor
+Fact purpose Derived from DIPGResearch, project
+
