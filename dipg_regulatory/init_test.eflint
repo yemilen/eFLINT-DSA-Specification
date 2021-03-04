@@ -1,0 +1,6 @@
+#include "gdpr/dipg_specialization.eflint".
+
++person(Alice).
++member(PMC).
++affiliated-with(Alice,PMC).
++project(P1).
