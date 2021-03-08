@@ -22,7 +22,6 @@ Fact access Identified by researcher * project * dataset
 Fact researcher Derived from person When affiliated-with(person, member)
                                                  ,member
 Fact affiliated-with Identified by person * member
-Fact controller Identified by researcher
 Fact eligible-access Identified by dataset * purpose
 Fact thirdparty
 Fact consent Identified by donor * member * purpose
