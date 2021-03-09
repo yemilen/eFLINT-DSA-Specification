@@ -1,0 +1,4 @@
+#include "dsa.eflint".
++member(AUMC).
++person(Bob).
++affiliated-with(Bob, AUMC).
