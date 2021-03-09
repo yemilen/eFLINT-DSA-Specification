@@ -1,0 +1,8 @@
+#include "dsa.eflint".
+
++member(STa).
++person(Eve).
++affiliated-with(Eve,STa).
++proposal(P1,P1).
+send-proposal(Eve,P1,EC).
+approve-proposal(EC,P1,R1).
