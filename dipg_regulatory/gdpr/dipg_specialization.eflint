@@ -1,7 +1,6 @@
 #include "terms.eflint".
 #include "gdpr/consent.eflint".
-#include "collection_and_transfer.eflint".
-#include "conditions_for_access.eflint".
+
 
 Fact controller Derived from member
 Fact processor Derived from dcog
