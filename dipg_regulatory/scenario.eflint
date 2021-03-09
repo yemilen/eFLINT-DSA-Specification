@@ -2,3 +2,5 @@
 +member(AUMC).
 +person(Bob).
 +affiliated-with(Bob, AUMC).
++project(DIPGResearch).
++access(Bob,DIPGResearch,D1).
