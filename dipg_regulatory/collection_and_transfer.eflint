@@ -1,3 +1,4 @@
+#include "terms.eflint".
 
 Act make_data_available  // the act of assigning the permission to make data available
   Actor dipg
@@ -6,9 +7,8 @@ Act make_data_available  // the act of assigning the permission to make data ava
   Creates transfer-dataset-coded-duty()
   Holds when member, proposal
 
-Duty transfer-dataset-coded-duty 
+Duty transfer-dataset-coded-duty
   Holder member
   Claimant dipg
   Related to dataset
-  Violated when transfer-datset-uncoded ()
-  creates assign-member-ownerright(),creates compliance-duty(),creates allow-further-usage-purpose-duty()
+  Violated when transfer-datset-uncoded()
