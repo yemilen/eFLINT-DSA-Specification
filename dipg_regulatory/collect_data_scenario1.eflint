@@ -1,0 +1,8 @@
+#include "dsa.eflint".
+
++donor(Dave).
++dataset(D1).
++subject-of(Dave,D1).
++accurate-for-purpose(D1, DIPGResearch).
+give-consent(Dave, PMC, DIPGResearch).
+collect-personal-data(PMC, Dave, D1, DCOG, DIPGResearch).
