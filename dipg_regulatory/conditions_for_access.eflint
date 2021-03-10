@@ -1,6 +1,6 @@
 #include "gdpr/dipg_specialization.eflint".
 
-Fact owner-of Identified by dataset * company
+Fact owner-of Identified by dataset * member
 Fact has-unrestricted-right Identified by dataset * member
   Holds when owner-of(dataset * member)
 
