@@ -1,4 +1,4 @@
-#include "dipg_specialization.eflint".
+#include "gdpr/dipg_specialization.eflint".
 
 Act send-proposal
   Actor researcher
