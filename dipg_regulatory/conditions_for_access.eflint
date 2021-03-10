@@ -12,5 +12,5 @@ Act approve-proposal // when a project is approved, it creates a letter of appor
   Actor ecommittee
   Recipient researcher
   Related to project
-  creates send-letter-of-apporval()
+  Creates send-letter-of-apporval()
   Holds when member, proposal
