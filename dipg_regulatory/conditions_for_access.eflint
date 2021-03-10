@@ -4,7 +4,7 @@ Fact owner-of Identified by dataset * company
 Fact has-unrestricted-right Identified by dataset * member
   Holds when owner-of(dataset * member)
 
-
+Fact send-letter-of-approval Identified by ecommittee * member * proposal
 
 Act send-proposal
   Actor researcher
