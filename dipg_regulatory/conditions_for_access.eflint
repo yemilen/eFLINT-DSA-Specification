@@ -4,7 +4,7 @@ Fact owner-of Identified by dataset * company
 Fact has-unrestricted-right Identified by dataset * member
   Holds when owner-of(dataset * member)
 
-Fact send-letter-of-approval Identified by EC * member * proposal
+Fact send-letter-of-approval Identified by ecommittee * member * proposal
 
 Act send-proposal
   Actor researcher
@@ -13,7 +13,7 @@ Act send-proposal
   Creates proposal(purpose, project)
   Holds when researcher && ecommittee
 
-Act approve-proposal // when a project is approved, it creates a letter of apporval
+Act approve-proposal
   Actor ecommittee
   Recipient researcher
   Related to project
