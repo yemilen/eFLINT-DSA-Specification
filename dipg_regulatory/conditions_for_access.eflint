@@ -6,7 +6,7 @@ Fact has-unrestricted-right Identified by dataset * member
 
 Fact send-letter-of-approval Identified by ecommittee * member * proposal
 
-Act send-proposal
+Act send-proposal // the actor here can also be a member I think
   Actor researcher
   Recipient ecommittee
   Related to project, purpose
@@ -17,7 +17,7 @@ Act approve-proposal
   Actor ecommittee
   Recipient researcher
   Related to project
-  Creates send-letter-of-approval()
+  Creates send-letter-of-approval(ecommittee * member * proposal)
   Holds when member, proposal
 
 Act transfer-data
