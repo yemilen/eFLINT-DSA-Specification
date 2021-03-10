@@ -25,4 +25,4 @@ Act transfer-data
   Recipient dipg
   Related to dataset
   Creates has-unrestricted-right(dataset, member)
-  Holds when member(Exists)
+  Holds when (Exists member)
