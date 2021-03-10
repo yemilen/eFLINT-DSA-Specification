@@ -1,4 +1,0 @@
-+member(STa).
-+person(Eve).
-+affiliated-with(Eve,STa).
-+eligible-access(D1, DIPGResearch).
