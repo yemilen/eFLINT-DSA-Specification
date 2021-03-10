@@ -1,5 +1,8 @@
 #include "gdpr/dipg_specialization.eflint".
-
+Fact transfered-from Identified by dataset * member
+Fact has-owner-right Identified by dataset * member
+  Holds when transfered-from(dataset * member)
+  
 Act send-proposal
   Actor researcher
   Recipient ecommittee
@@ -15,9 +18,9 @@ Act approve-proposal // when a project is approved, it creates a letter of appor
   Holds when member, proposal
 
 
-Act assign-member-ownerright
-  Actor dipg
-  Recipient member
+Act transfer-data
+  Actor member
+  Recipient dipg
   Related to dataset
-  Creates owner-duty()
+  Creates has-owner-right()
   Holds when member(exists)
