@@ -6,9 +6,3 @@ Act make_data_available  // the act of assigning the permission to make data ava
   Related to project
   Creates transfer-dataset-coded-duty()
   Holds when member, proposal
-
-Duty transfer-dataset-coded-duty
-  Holder member
-  Claimant dipg
-  Related to dataset
-  Violated when transfer-datset-uncoded()
