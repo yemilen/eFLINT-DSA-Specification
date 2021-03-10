@@ -7,9 +7,17 @@ Act send-proposal
   Creates proposal(purpose, project)
   Holds when researcher && ecommittee
 
-
 Act approve-proposal // when a project is approved, it creates a letter of apporval
   Actor ecommittee
   Recipient researcher
   Related to project
+  Creates send-letter-of-apporval()
   Holds when member, proposal
+
+
+Act assign-member-ownerright
+  Actor dipg
+  Recipient member
+  Related to dataset
+  Creates owner-duty()
+  Holds when member(exists)
