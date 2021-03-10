@@ -2,7 +2,7 @@
 
 Fact owner-of Identified by dataset * member
 Fact has-unrestricted-right Identified by dataset * member
-  Holds when owner-of(dataset, member)
+  Holds when owner-of(dataset , member)
 
 Fact send-letter-of-approval Identified by ecommittee * member * proposal
 
@@ -10,7 +10,7 @@ Act send-proposal // the actor here can also be a member I think
   Actor researcher
   Recipient ecommittee
   Related to project, purpose
-  Creates proposal(purpose, project)
+  Creates proposal(purpose , project)
   Holds when researcher && ecommittee
 
 Act approve-proposal
@@ -18,11 +18,11 @@ Act approve-proposal
   Recipient researcher
   Related to project
   Creates send-letter-of-approval(ecommittee * member * proposal)
-  Holds when member, proposal
+  Holds when member , proposal
 
 Act transfer-data
   Actor member
   Recipient dipg
   Related to dataset
-  Creates has-unrestricted-right(dataset, member)
+  Creates has-unrestricted-right(dataset , member)
   Holds when (Exists member)
