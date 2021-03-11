@@ -1,0 +1,11 @@
+#include "dsa.eflint".
+
++member(STa).
++member(PMC).
++person(Eve).
++affiliated-with(Eve,STa).
+propose-project(Eve,EC,P1).
+approve-project(EC,STa,P1).
+send-letter-of-approval(DIPG,PMC,P1).
+sign-letter-of-approval(PMC,EC,P1).
+

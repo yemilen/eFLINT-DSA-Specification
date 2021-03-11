@@ -7,4 +7,10 @@
 propose-project(Eve,EC,P1).
 approve-project(EC,STa,P1).
 send-letter-of-approval(DIPG,STa,P1).
-sign-letter-of-approval(Eve,EC,P1).
+sign-letter-of-approval(STa,EC,P1).
+?duty-to-select-data(EC, STa, P1).
+?duty-to-send-data(EC, STa, P1).
+select-data(EC, STa, P1, D1).
+?!duty-to-select-data(EC, STa, P1).
+send-data(EC, STa, D1).
+?!duty-to-send-data(EC, STa, P1).
