@@ -1,15 +1,15 @@
 Fact coded Identified by actual_dataset
 Fact data
 Fact code Identified by Int
-Fact dataset Identified by D1
+Fact dataset 
 Fact actual_dataset
 Fact purpose
 Fact researcher
 Fact person
 Fact donor Identified by String
-Fact dcog Identified by DCOG
-Fact dipg Identified by DIPG
-Fact ecommittee Identified by EC
+Fact dcog Derived from DCOG
+Fact dipg Derived from DIPG
+Fact ecommittee Derived from EC
 Fact findings Identified by data * project
 Fact member // institutes are members
 Fact country
@@ -17,7 +17,7 @@ Fact country_of Identified by member * country
 Fact coordinator Identified by member // coordinator of the country in which they resides
 Fact access Identified by researcher * project * dataset
 Fact project
-Fact proposal Identified by purpose * project // proposal is always for a project
+Fact proposal Identified by member * purpose * project // proposal is always for a project
 Fact access Identified by researcher * project * dataset
 Fact researcher Derived from person When affiliated-with(person, member)
                                                  ,member

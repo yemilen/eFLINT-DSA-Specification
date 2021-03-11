@@ -1,19 +1,46 @@
 #include "gdpr/dipg_specialization.eflint".
 
-
-
 Fact send-letter-of-approval Identified by ecommittee * member * proposal
 
-Act send-proposal
+Act propose-project 
   Actor researcher
   Recipient ecommittee
-  Related to project, purpose
-  Creates proposal(purpose, project)
+  Related to project
+  Creates proposal(researcher,project, project) When member(researcher)
+         ,proposal(member, project, project)    When affiliated-with(researcher,member)
   Holds when researcher && ecommittee
 
-Act approve-proposal
+// Act approve-proposal
+//   Actor ecommittee
+//   Recipient member 
+//   Related to proposal 
+//   Creates send-letter-of-approval(ecommittee, member, proposal)
+//   Holds when ecommittee && member && proposal.member == member, proposal.purpose == proposal.project 
+
+Act approve-project
   Actor ecommittee
-  Recipient researcher
+  Recipient member 
   Related to project
-  Creates send-letter-of-approval(ecommittee, member, proposal)
-  Holds when member, proposal
+  Creates approved(project, member) 
+  Holds when ecommittee && member && proposal(member, project, project) 
+
+Fact approved Identified by project * member
+
+Act send-letter-of-approval // letter of approval is sent to confirm project proposal approval
+  Actor dipg
+  Recipient member
+  Related to project
+  Creates letter-of-approval-sent(project, member)
+  Holds when dipg && member && approved(project, member) 
+
+Fact letter-of-approval-sent Identified by project * member
+Fact letter-of-approval-signed Identified by project * researcher
+
+Act sign-letter-of-approval 
+  Actor researcher
+  Recipient ecommittee
+  Related to project
+  Creates letter-of-approval-signed(project, researcher)
+  Holds when 
+    researcher && ecommittee && letter-of-approval-sent(project, member) When member(researcher)
+   ,researcher && ecommittee && letter-of-approval-sent(project, member) When affiliated-with(researcher, member)
