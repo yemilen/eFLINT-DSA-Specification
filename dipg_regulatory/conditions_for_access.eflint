@@ -42,8 +42,10 @@ Act sign-letter-of-approval
   Related to project
   Creates letter-of-approval-signed(project, researcher) When member(researcher)
          ,letter-of-approval-signed(project, member) When affiliated-with(researcher,member)
-         ,duty-to-select-data(ecommittee, researcher, project)
-         ,duty-to-send-data(ecommittee, researcher, project)
+         ,duty-to-select-data(ecommittee, researcher, project) When member(researcher)
+         ,duty-to-select-data(ecommittee, member, project) When affiliated-with(researcher,member)
+         ,duty-to-send-data(ecommittee, researcher, project) When member(researcher)
+         ,duty-to-send-data(ecommittee, member, project) When affiliated-with(researcher,member)
   Holds when 
     researcher && ecommittee && letter-of-approval-sent(project, researcher) && member(researcher)
    ,researcher && ecommittee && letter-of-approval-sent(project, member) && affiliated-with(researcher, member)
@@ -73,7 +75,6 @@ Act send-data
   Actor ecommittee 
   Recipient member 
   Related to dataset
-  // Created ... // TODO
   Terminates duty-to-send-data(ecommittee,member,project) When selected(dataset,project)
   Holds when duty-to-send-data(ecommittee,member,project) && selected(dataset, project)
 
