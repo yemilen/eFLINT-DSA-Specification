@@ -3,6 +3,7 @@
 +dataset(D1).
 +member(STa).
 +person(Eve).
++project(P1).
 +affiliated-with(Eve,STa).
 propose-project(Eve,EC,P1).
 approve-project(EC,STa,P1).
@@ -12,5 +13,6 @@ sign-letter-of-approval(STa,EC,P1).
 ?duty-to-send-data(EC, STa, P1).
 select-data(EC, STa, P1, D1).
 ?!duty-to-select-data(EC, STa, P1).
+?duty-to-send-data(EC, STa, P1).
 send-data(EC, STa, D1).
 ?!duty-to-send-data(EC, STa, P1).
