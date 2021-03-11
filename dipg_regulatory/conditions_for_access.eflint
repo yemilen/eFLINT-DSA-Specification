@@ -20,15 +20,15 @@ Act approve-proposal
   Creates send-letter-of-approval(ecommittee * member * proposal)
   Holds when member, proposal
 
-Act transfer-data
-  Actor member
+Act transfer
+  Actor researcher
   Recipient dipg
   Related to dataset
-  Creates grant-unrestricted-right(dataset, member)
-  Holds when (Exists member)
+  Creates grant-unrestricted-right()
+  Holds when (Exists researcher:affiliated-with(person, member))
 
 Act grant-unrestricted-right
   Actor dipg
   Recipient member
   Related to dataset
-  Holds when owner-of(dataset,member)
+  Holds when (member=owner-of(dataset,member))
