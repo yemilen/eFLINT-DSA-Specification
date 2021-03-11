@@ -1,12 +1,10 @@
 #include "gdpr/dipg_specialization.eflint".
 
-Fact owner-of Identified by dataset * member
-Fact has-unrestricted-right Identified by dataset * member
-  Holds when owner-of(dataset, member)
+
 
 Fact send-letter-of-approval Identified by ecommittee * member * proposal
 
-Act send-proposal // the actor here can also be a member I think
+Act send-proposal
   Actor researcher
   Recipient ecommittee
   Related to project, purpose
@@ -19,16 +17,3 @@ Act approve-proposal
   Related to project
   Creates send-letter-of-approval(ecommittee, member, proposal)
   Holds when member, proposal
-
-Act transfer
-  Actor researcher
-  Recipient dipg
-  Related to dataset
-  Creates grant-unrestricted-right()
-  Holds when (Exists researcher:affiliated-with(person, member))
-
-Act grant-unrestricted-right
-  Actor dipg
-  Recipient member
-  Related to dataset
-  Holds when (member: owner-of(dataset, member))
