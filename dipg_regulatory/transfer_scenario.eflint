@@ -1,0 +1,6 @@
++member(STA).
++person(Eve).
++affiliated-with(Eve,STA).
+transfer(Eve,STA,D1).
+owner-of(Eve,D1).
+?has-unrestricted-access(Eve,D1).
