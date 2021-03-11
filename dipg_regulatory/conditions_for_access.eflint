@@ -17,7 +17,7 @@ Act approve-proposal
   Actor ecommittee
   Recipient researcher
   Related to project
-  Creates send-letter-of-approval(ecommittee * member * proposal)
+  Creates send-letter-of-approval(ecommittee, member, proposal)
   Holds when member, proposal
 
 Act transfer
