@@ -18,7 +18,7 @@ Fact coordinator Identified by member // coordinator of the country in which the
 Fact access Identified by researcher * project * dataset
 Fact project
 Fact proposal Identified by purpose * project // proposal is always for a project
-Fact access Identified by researcher * project * dataset 
+Fact access Identified by researcher * project * dataset
 Fact researcher Derived from person When affiliated-with(person, member)
                                                  ,member
 Fact affiliated-with Identified by person * member
