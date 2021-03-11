@@ -31,4 +31,4 @@ Act grant-unrestricted-right
   Actor dipg
   Recipient member
   Related to dataset
-  Holds when (member=owner-of(dataset,member))
+  Holds when (member:owner-of(dataset,member))
