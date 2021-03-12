@@ -1,9 +1,8 @@
 Fact coded Identified by actual_dataset
 Fact data
 Fact code Identified by Int
-Fact dataset 
+Fact dataset
 Fact actual_dataset
-Fact purpose
 Fact researcher
 Fact person
 Fact donor Identified by String
