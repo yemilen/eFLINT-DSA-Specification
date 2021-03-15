@@ -1,0 +1,51 @@
+#include "gdpr/dipg_specialization.eflint".
+
+Act send-data
+  Actor ecommittee
+  Recipient member
+  Related to dataset
+  Creates duty-not-to-duplicate (ecommittee, member, project) When affiliated-with(researcher,member)
+         ,duty-not-to-share(ecommittee, member, project) When affiliated-with(researcher,member)
+         ,duty-to-usage-restriction(ecommittee, member, project) When affiliated-with(researcher,member)
+  Terminates duty-to-send-data(ecommittee,member,project) When selected(dataset,project)
+  Holds when duty-to-send-data(ecommittee,member,project) && selected(dataset, project)
+
+Fact duplicated
+Duty-not-to-duplicate
+  Holder ecommittee
+  Claimant researcher
+  Related to dataset
+  Violated when dataset-duplicated()
+
+Event dataset-duplicated
+  Related to dataset,
+  Holds when             // working on it
+
+Fact thirdparty Identified by person Holds when
+    (Exists !affiliated-with(person,member))
+
+Duty-not-to-share
+  Holder ecommittee
+  Claimant researcher
+  Related to dataset
+  Violated when dataset-without-consent(researcher, thirdparty, dataset, consent-ecommittee)
+
+Fact consent-ecommittee Identified by ecommittee * consent
+
+Act dataset-shared
+  Actor researcher
+  Recipient thirdparty
+  Related to dataset
+  Holds when researcher && thirdparty && dataset
+
+Duty-to-usage-restriction
+  Holder ecommittee
+  Claimant researcher
+  Related to dataset
+  Violated when dataset-misuse()
+
+Fact misuse Derived from purpose When (Exists !purpose, dataset)
+
+Event dataset-misuse()
+  Related to dataset
+  Holds when purpose
