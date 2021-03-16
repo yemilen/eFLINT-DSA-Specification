@@ -1,0 +1,12 @@
+#include "dsa.eflint".
+
++dataset(D1).
++member(STa).
++person(Eve).
++thirdparty(GRM).
++project(P1).
++affiliated-with(Eve, STa).
+?duty-not-to-share(EC, STa, D1).
+send-request-to-share().
+deny-consent(EC,STa,GRM,D1).
+?!duty-to-not-share(EC, STa, D1).
