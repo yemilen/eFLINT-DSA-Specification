@@ -11,6 +11,7 @@ Act send-data
   Holds when duty-to-send-data(ecommittee,member,project) && selected(dataset, project)
 
 Fact duplicated
+
 Duty-not-to-duplicate
   Holder ecommittee
   Claimant researcher
@@ -18,8 +19,7 @@ Duty-not-to-duplicate
   Violated when dataset-duplicated()
 
 Event dataset-duplicated
-  Related to dataset,
-  Holds when             // working on it
+  Related to dataset
 
 Fact thirdparty Identified by person Holds when
     (Exists !affiliated-with(person,member))
@@ -28,9 +28,31 @@ Duty-not-to-share
   Holder ecommittee
   Claimant researcher
   Related to dataset
+  Creates ask-for-consent()
   Violated when dataset-without-consent(researcher, thirdparty, dataset, consent-ecommittee)
 
-Fact consent-ecommittee Identified by ecommittee * consent
+Act ask-for-consent
+  Actor researcher
+  Recipient ecommittee
+  Related to purpose, dataset
+  Creates grant-consent(ecommittee, econsent, member, thirdparty)
+          ,deny-conset(ecommittee, econsent, member, thirdparty)
+  Holds when ecommittee && econsent && member && thirdparty
+
+Fact econsent Identified by ecommittee * consent * purpose
+
+Act grant-econsent
+  Actor ecommittee
+  Recipient researcher
+  Related to purpose
+  Terminates duty-not-to-share()
+  Holds when ecommittee && econsent && member && thirdparty
+
+Act deny-econsent
+  Actor ecommittee
+  Recipient thirdparty
+  Related to purpose
+  Holds when ecommittee && !econsent && member && thirdparty
 
 Act dataset-shared
   Actor researcher
@@ -48,4 +70,4 @@ Fact misuse Derived from purpose When (Exists !purpose, dataset)
 
 Event dataset-misuse()
   Related to dataset
-  Holds when purpose
+  Terminates access(researcher, project, dataset)
