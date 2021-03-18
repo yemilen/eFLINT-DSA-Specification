@@ -1,20 +1,18 @@
-dataset(D1).
+#include "dsa.eflint".
+
++dataset(D1).
 +member(STa).
 +person(Eve).
 +thirdparty(GRM).
 +project(P1).
 +affiliated-with(Eve,STa).
-?duty-not-to-share(EC, STa, D1).
-send-request-to-share(Eve,EC,D1).
-grant-consent(EC,STa,GRM,D1).
-share-data(STa,GRM,D1).
 
+share-with-thirdparty(Eve,GRM,D1).
+?duty-ask-econsent(EC, STa, D1).
+ask-econsent(researcher, ecommitte, D1, econsent).
+?!duty-ask-econsent(EC, STa, D1).
 
-sign-letter-of-approval(STa,EC,P1).
-?duty-to-select-data(EC, STa, P1).
-?duty-to-send-data(EC, STa, P1).
-select-data(EC, STa, P1, D1).
-?!duty-to-select-data(EC, STa, P1).
-?duty-to-send-data(EC, STa, P1).
-send-data(EC, STa, D1).
-?!duty-to-send-data(EC, STa, P1).
+//send-request-to-share(Eve,EC,GRM,D1).
+//grant-consent(EC,STa,GRM,D1).
+//?!duty-not-to-share(EC, STa, D1).
+//share-data(STa,GRM,D1).
