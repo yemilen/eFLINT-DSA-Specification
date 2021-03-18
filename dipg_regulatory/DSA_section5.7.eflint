@@ -24,13 +24,14 @@ Event dataset-duplicated
 Fact thirdparty Identified by person Holds when
     (Exists !affiliated-with(person,member))
 
-Act share_with_thirdparty
-  Actor member
+Act share-with-thirdparty
+  Actor researcher
   Recipient thirdparty
   Related dataset
   Creates duty-ask-econsent(ecommittee, member, purpose)
+  Holds when researcher && thirdparty && econsent
 
-Duty-askEC-for-consent
+Duty-ask-econsent
   Holder ecommittee
   Claimant researcher
   Related to purpose
@@ -42,7 +43,7 @@ Act shared-without-econsent
   Actor researcher
   Recipient ecommittee
   Related to purpose, dataset
-  Holds when (Exists share_with_thirdparty && !econsent)
+  Holds when (Exists !econsent && share-with-thirdparty)
 
 Act ask-econsent
   Actor researcher
@@ -58,14 +59,14 @@ Act grant-econsent
   Actor ecommittee
   Recipient researcher
   Related to purpose
-  Terminates duty-askEC-for-consent()
+  Terminates duty-ask-econsent()
   Holds when ecommittee && econsent && member && thirdparty
 
 Act deny-econsent
   Actor ecommittee
   Recipient thirdparty
   Related to purpose
-  Terminates duty-askEC-for-consent()
+  Terminates duty-ask-econsent()
   Holds when ecommittee && !econsent && member && thirdparty
 
 Duty-to-usage-restriction
