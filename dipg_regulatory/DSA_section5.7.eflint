@@ -5,7 +5,7 @@ Act send-data
   Recipient member
   Related to dataset
   Creates duty-not-to-duplicate (ecommittee, member, project) When affiliated-with(researcher,member)
-         ,duty-not-to-share(ecommittee, member, project) When affiliated-with(researcher,member)
+         //,duty-not-to-share(ecommittee, member, project) When affiliated-with(researcher,member)
          ,duty-to-usage-restriction(ecommittee, member, project) When affiliated-with(researcher,member)
   Terminates duty-to-send-data(ecommittee,member,project) When selected(dataset,project)
   Holds when duty-to-send-data(ecommittee,member,project) && selected(dataset, project)
@@ -24,14 +24,27 @@ Event dataset-duplicated
 Fact thirdparty Identified by person Holds when
     (Exists !affiliated-with(person,member))
 
-Duty-not-to-share
+Act share_with_thirdparty
+  Actor member
+  Recipient thirdparty
+  Related dataset
+  Creates duty-ask-econsent(ecommittee, member, purpose)
+
+Duty-askEC-for-consent
   Holder ecommittee
   Claimant researcher
-  Related to dataset
-  Creates ask-for-consent()
-  Violated when dataset-without-consent(researcher, thirdparty, dataset, consent-ecommittee)
+  Related to purpose
+  Creates ask-econsent()
+  Violated when shared-without-econsent(researcher, thirdparty, dataset)
+               ,deny-econsent(ecommitte, thirdparty, purpose)
 
-Act ask-for-consent
+Act shared-without-econsent
+  Actor researcher
+  Recipient ecommittee
+  Related to purpose, dataset
+  Holds when (Exists share_with_thirdparty && !econsent)
+
+Act ask-econsent
   Actor researcher
   Recipient ecommittee
   Related to purpose, dataset
@@ -45,20 +58,15 @@ Act grant-econsent
   Actor ecommittee
   Recipient researcher
   Related to purpose
-  Terminates duty-not-to-share()
+  Terminates duty-askEC-for-consent()
   Holds when ecommittee && econsent && member && thirdparty
 
 Act deny-econsent
   Actor ecommittee
   Recipient thirdparty
   Related to purpose
+  Terminates duty-askEC-for-consent()
   Holds when ecommittee && !econsent && member && thirdparty
-
-Act dataset-shared
-  Actor researcher
-  Recipient thirdparty
-  Related to dataset
-  Holds when researcher && thirdparty && dataset
 
 Duty-to-usage-restriction
   Holder ecommittee
