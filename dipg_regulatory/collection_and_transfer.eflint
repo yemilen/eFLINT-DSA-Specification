@@ -1,14 +1,15 @@
+Act request-transfer-to-dipg
+  Actor member
+  Recipient ecommittee
+  Related to purpose
+  Holds when member && ecommittee
 
-Act make_data_available  // the act of assigning the permission to make data available
-  Actor dipg
-  Recipient researcher
-  Related to project
-  Creates transfer-dataset-coded-duty()
-  Holds when member, proposal
-
-Duty transfer-dataset-coded-duty 
-  Holder member
-  Claimant dipg
-  Related to dataset
-  Violated when transfer-datset-uncoded ()
-  creates assign-member-ownerright(),creates compliance-duty(),creates allow-further-usage-purpose-duty()
+Act allow-transfer
+  Actor ecommittee
+  Recipient member
+  Related to purpose
+  Creates transfer-data-coded-duty()
+         ,assign-member-ownerright()
+       //,duty-patient-consent
+       //,duty-eligible-participant
+  Holds when member && ecommittee
