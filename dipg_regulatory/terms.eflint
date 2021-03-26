@@ -14,7 +14,6 @@ Fact member // institutes are members
 Fact country
 Fact country_of Identified by member * country
 Fact coordinator Identified by member // coordinator of the country in which they resides
-Fact access Identified by researcher * project * dataset
 Fact project
 Fact proposal Identified by member * purpose * project // proposal is always for a project
 Fact access Identified by researcher * project * dataset
