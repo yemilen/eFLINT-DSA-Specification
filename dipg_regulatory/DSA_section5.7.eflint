@@ -1,82 +1,44 @@
 #include "gdpr/dipg_specialization.eflint".
 
-Act send-data
-  Actor ecommittee
-  Recipient member
-  Related to dataset
-  Creates duty-not-to-duplicate (ecommittee, member, project) When affiliated-with(researcher,member)
-         //,duty-not-to-share(ecommittee, member, project) When affiliated-with(researcher,member)
-         ,duty-to-usage-restriction(ecommittee, member, project) When affiliated-with(researcher,member)
-  Terminates duty-to-send-data(ecommittee,member,project) When selected(dataset,project)
-  Holds when duty-to-send-data(ecommittee,member,project) && selected(dataset, project)
+  Act send-data
+    Actor ecommittee
+    Recipient member
+    Related to dataset
+    Creates duty-usage-project-only()
+    Terminates duty-to-send-data(ecommittee,member,project) When selected(dataset,project)
+    Holds when duty-to-send-data(ecommittee,member,project) && selected(dataset, project)
 
-Fact duplicated
+  Duty duty-usage-project-only
+    Holder researcher
+    Claimant ecommittee
+    Related to dataset, purpose
+    Violated when usage-outside-project()
 
-Duty-not-to-duplicate
-  Holder ecommittee
-  Claimant researcher
-  Related to dataset
-  Violated when dataset-duplicated()
+  Event usage-outside-project
+    Related to dataset, purpose
+    Terminates access(researcher, project, dataset)
+    Holds when researcher, dataset, purpose, project
 
-Event dataset-duplicated
-  Related to dataset
+  Fact thirdparty
 
-Fact thirdparty Identified by person Holds when
-    (Exists !affiliated-with(person,member))
+  Act disclose-or-provide-access
+    Actor researcher
+    Recipient thirdparty
+    Related to dataset, thirdparty
+    Creates permission()
+    Holds when researcher, dataset, thirdparty
 
-Act share-with-thirdparty
-  Actor researcher
-  Recipient thirdparty
-  Related dataset
-  Creates duty-ask-econsent(ecommittee, member, purpose)
-  Holds when researcher && thirdparty && econsent
+  Act permission
+    Actor ecommittee
+    Recipient researcher
+    Related to dataset, thirdparty
+    Creates written-consent()
+    Holds when (Forall thirdparty: disclose-or-provide-access() When
+                (Exists thirdparty: written-consent(ecommittee, researcher, dataset, thirdparty)))
 
-Duty-ask-econsent
-  Holder ecommittee
-  Claimant researcher
-  Related to purpose
-  Creates ask-econsent()
-  Violated when shared-without-econsent(researcher, thirdparty, dataset)
-               ,deny-econsent(ecommitte, thirdparty, purpose)
+  Fact written-consent Identified by ecommittee * researcher * dataset * thirdparty
 
-Act shared-without-econsent
-  Actor researcher
-  Recipient ecommittee
-  Related to purpose, dataset
-  Holds when (Exists !econsent && share-with-thirdparty)
-
-Act ask-econsent
-  Actor researcher
-  Recipient ecommittee
-  Related to purpose, dataset
-  Creates grant-consent(ecommittee, econsent, member, thirdparty)
-          ,deny-conset(ecommittee, econsent, member, thirdparty)
-  Holds when ecommittee && econsent && member && thirdparty
-
-Fact econsent Identified by ecommittee * consent * purpose
-
-Act grant-econsent
-  Actor ecommittee
-  Recipient researcher
-  Related to purpose
-  Terminates duty-ask-econsent()
-  Holds when ecommittee && econsent && member && thirdparty
-
-Act deny-econsent
-  Actor ecommittee
-  Recipient thirdparty
-  Related to purpose
-  Terminates duty-ask-econsent()
-  Holds when ecommittee && !econsent && member && thirdparty
-
-Duty-to-usage-restriction
-  Holder ecommittee
-  Claimant researcher
-  Related to dataset
-  Violated when dataset-misuse()
-
-Fact misuse Derived from purpose When (Exists !purpose, dataset)
-
-Event dataset-misuse()
-  Related to dataset
-  Terminates access(researcher, project, dataset)
+  Event duplicate-data
+    Related to dataset
+    Terminates access(researcher, project, dataset)
+    Holds when researcher, dataset, purpose
