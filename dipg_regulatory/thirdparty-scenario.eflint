@@ -1,0 +1,7 @@
++dataset(D1).
++person(Eve).
++member(STa).
++affiliated-with(Eve,STa).
++thirdparty(GRM).
+give-written-consent(EC,Eve,D1,GRM).
+disclose-or-provide-access(Eve,GRM,D1).
