@@ -1,44 +1,18 @@
 #include "gdpr/dipg_specialization.eflint".
 
-  Act send-data
-    Actor ecommittee
-    Recipient member
-    Related to dataset
-    Creates duty-usage-project-only()
-    Terminates duty-to-send-data(ecommittee,member,project) When selected(dataset,project)
-    Holds when duty-to-send-data(ecommittee,member,project) && selected(dataset, project)
+Fact thirdparty
 
-  Duty duty-usage-project-only
-    Holder researcher
-    Claimant ecommittee
-    Related to dataset, purpose
-    Violated when usage-outside-project()
+Act give-written-consent
+  Actor ecommittee
+  Recipient researcher
+  Related to dataset, thirdparty
+  Creates written-consent()
+  Holds when ecommittee && researcher
 
-  Event usage-outside-project
-    Related to dataset, purpose
-    Terminates access(researcher, project, dataset)
-    Holds when researcher, dataset, purpose, project
+Fact written-consent Identified by ecommittee * researcher * dataset * thirdparty
 
-  Fact thirdparty
-
-  Act disclose-or-provide-access
-    Actor researcher
-    Recipient thirdparty
-    Related to dataset, thirdparty
-    Creates permission()
-    Holds when researcher, dataset, thirdparty
-
-  Act permission
-    Actor ecommittee
-    Recipient researcher
-    Related to dataset, thirdparty
-    Creates written-consent()
-    Holds when (Forall thirdparty: disclose-or-provide-access() When
-                (Exists thirdparty: written-consent(ecommittee, researcher, dataset, thirdparty)))
-
-  Fact written-consent Identified by ecommittee * researcher * dataset * thirdparty
-
-  Event duplicate-data
-    Related to dataset
-    Terminates access(researcher, project, dataset)
-    Holds when researcher, dataset, purpose
+Act disclose-or-provide-access
+  Actor researcher
+  Recipient thirdparty
+  Related to dataset
+  Holds when written-consent(ecommittee, researcher, dataset, thirdparty)
