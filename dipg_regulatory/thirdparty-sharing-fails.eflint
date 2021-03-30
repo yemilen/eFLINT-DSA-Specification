@@ -1,0 +1,6 @@
++dataset(D1).
++person(Eve).
++member(STa).
++affiliated-with(Eve,STa).
++thirdparty(GRM).
+disclose-or-provide-access(Eve,GRM,D1).
