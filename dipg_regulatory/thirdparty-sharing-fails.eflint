@@ -1,3 +1,5 @@
+#include "dsa.eflint".
+
 +dataset(D1).
 +person(Eve).
 +member(STa).
