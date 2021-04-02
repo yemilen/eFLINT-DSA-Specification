@@ -2,4 +2,5 @@
 
 
 #include "conditions_for_access.eflint".
-#include "DSA_section5.7.eflint"
+#include "DSA_section5.7.eflint".
+#include "section5.7B.eflint".
