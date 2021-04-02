@@ -1,0 +1,19 @@
+#include "gdpr/dipg_specialization.eflint".
+
+
+Fact selected Identified by dataset * project
+Fact action
+Fact usage Identified by researcher * dataset * action
+Fact approved-project-data-usage Identified by approved * dataset // approved is identified by project, member
+
+Act data-usage-outside-project
+  Actor researcher
+  Related to dataset
+  Creates terminate-access(ecommittee, researcher, project)
+  Holds when (Exists dataset,member:usage(researcher,dataset,action)&&!approved-project-data-usage(approved,dataset))
+
+Act terminate-access
+  Actor ecommittee
+  Recipient researcher
+  Related to project
+  Holds when researcher && ecommittee
