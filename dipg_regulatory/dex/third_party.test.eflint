@@ -1,0 +1,22 @@
+#require "union.eflint".
+#require "dipg_consortium.eflint".
+
+// provided by configuration of dex application
++letter-of-approval-signed(PMC_Project, PMC).
++approved-algorithm(A1,PMC_Project).
+
+// follow from the source where This dataset resides when the application starts
++provider(AMC).
++domain(AMC).
+
+// following statement ends initialisation phase
+initialise().
+
+give-written-consent(EC, PMC, This, SisterInstitute1).
+?!Enabled(access(consumer=SisterInstitute2)).
+access(consumer=SisterInstitute1).
+
+//transfer(SisterInstitute1). // results in violation of obligation to keep data within consortium
+transfer(PMC).
+?!Enabled(compute(PMC, AMC, A2)).
+compute(PMC,AMC,A1).

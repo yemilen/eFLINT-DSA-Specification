@@ -1,12 +1,14 @@
 #include "gdpr/dipg_specialization.eflint".
 
+// 5.7 e) sharing with third party requires consent//permission by the committee
+
 Fact thirdparty
 
 Act give-written-consent
   Actor ecommittee
   Recipient researcher
   Related to dataset, thirdparty
-  Creates written-consent()
+  Creates written-consent() // not really consent, as consent is given by data subjects
   Holds when ecommittee && researcher
 
 Fact written-consent Identified by ecommittee * researcher * dataset * thirdparty
