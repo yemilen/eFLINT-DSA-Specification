@@ -1,6 +1,5 @@
-#require "dsa.eflint".
-
-#require "dex.eflint".
+#require "dsa.eflint". // specification file bringing together sections of DIPG regulatory document
+#require "dex.eflint". // specification file that contains main data exchange concepts like 'access' and 'compute'
 
 Fact dataset Derived from This // The string "This" represents the dataset to which this policy is attached
 
@@ -29,9 +28,9 @@ Extend Act compute
   Conditioned by approved-algorithm(algorithm, letter-of-approval-signed.project)
 
 .
-#require "consortium.eflint".
+#require "consortium.eflint". // introduces the obligation that data must reside within consortium 
 
-Extend Fact consortium // both DCOG and members of DIPG network are in the consortium
+Extend Fact consortium // states that both DCOG and DIPG members are in the consortium
   Holds when domain == DCOG
             ,member(domain)
 
