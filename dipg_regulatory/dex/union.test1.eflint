@@ -27,3 +27,5 @@ access(consumer=SisterInstitute1).
 transfer(PMC).
 compute(PMC,AMC,A1). // and because A1 is approved for the approved project PMC_Project, compute is allowed
 ?!Enabled(compute(PMC, AMC, A2)).  //TODO: connect this violation to `observe-misuse` action
+
+//transfer(UCLA).
