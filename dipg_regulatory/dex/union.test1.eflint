@@ -8,18 +8,22 @@
 +letter-of-approval-signed(PMC_Project, PMC).
 +approved-algorithm(A1,PMC_Project).
 
-// follow from the source where This dataset resides when the application starts
+// AMC is the provider of 'This' dataset and AMC is where the data is currently located
 +provider(AMC).
 +domain(AMC).
 
 // following statement ends initialisation phase
 initialise().
 
+// EC permits a sister institute of PMC to access
 give-written-consent(EC, PMC, This, SisterInstitute1).
 ?!Enabled(access(consumer=SisterInstitute2)).
 access(consumer=SisterInstitute1).
 
+// however a transfer to that institute is still not allowed
 //transfer(SisterInstitute1). // results in violation of obligation to keep data within consortium
+
+// transfer to PMC is allowed because in consortium
 transfer(PMC).
-compute(PMC,AMC,A1).
+compute(PMC,AMC,A1). // and because A1 is approved for the approved project PMC_Project, compute is allowed
 ?!Enabled(compute(PMC, AMC, A2)).  //TODO: connect this violation to `observe-misuse` action
