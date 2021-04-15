@@ -31,5 +31,9 @@ Extend Act compute
 .
 #require "consortium.eflint".
 
+Extend Fact consortium // both DCOG and members of DIPG network are in the consortium
+  Holds when domain == DCOG
+            ,member(domain)
+
 // interpretation of `third-party`: third party is not in consortium
 

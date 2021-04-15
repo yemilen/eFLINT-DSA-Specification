@@ -1,7 +1,10 @@
 #require "union.eflint".
-#require "dipg_consortium.eflint".
 
 // provided by configuration of dex application
++member(PMC).
++member(AMC).
++member(EMC).
++member(NCI).
 +letter-of-approval-signed(PMC_Project, PMC).
 +approved-algorithm(A1,PMC_Project).
 
@@ -18,5 +21,5 @@ access(consumer=SisterInstitute1).
 
 //transfer(SisterInstitute1). // results in violation of obligation to keep data within consortium
 transfer(PMC).
-?!Enabled(compute(PMC, AMC, A2)).
 compute(PMC,AMC,A1).
+?!Enabled(compute(PMC, AMC, A2)).  //TODO: connect this violation to `observe-misuse` action
