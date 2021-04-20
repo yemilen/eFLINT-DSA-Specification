@@ -1,0 +1,38 @@
+#require "dsa.eflint". // specification file bringing together sections of DIPG regulatory document
+#require "dex.eflint". // specification file that contains main data exchange concepts like 'access' and 'compute'
+
+Fact dataset Derived from This // The string "This" represents the dataset to which this policy is attached
+
+// The consumer is derived from the signed letter of approval (for a project)
+Extend Fact consumer Derived from letter-of-approval-signed.member
+
+// The purpose for processing by the consumer is the approved project
+// this is derived from the fact that the approved project is recognised as a project by rule below
+Extend Fact project Derived from letter-of-approval-signed.project
+
+// How to allow access to third-parties when permission is given by committee?
+//option1: let derivation clause make permitted third parties member of consortium (DECLINED)
+//option2: additional derivation clause for `access` act of `dex.eflint`
+
+Extend Act access // TODO, how to refer to actor?
+  // rule below assumes individual researchers are not considered as researchers, just 'members'
+  Holds when written-consent(thirdparty=consumer,researcher=letter-of-approval-signed.member)
+
+// Disallow `compute` when algorithm is not approved for project
+
+// the DIPG marketplace should have a mechanism for checking algorithms against project proposals
+// in order to instantiate facts of the type below
+Fact approved-algorithm Identified by algorithm * project
+
+Extend Act compute
+  Conditioned by approved-algorithm(algorithm, letter-of-approval-signed.project)
+
+.
+#require "consortium.eflint". // introduces the obligation that data must reside within consortium 
+
+Extend Fact consortium // states that both DCOG and DIPG members are in the consortium
+  Holds when domain == DCOG
+            ,member(domain)
+
+// interpretation of `third-party`: third party is not in consortium
+
