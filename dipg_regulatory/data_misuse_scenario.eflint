@@ -1,0 +1,9 @@
+#include "dsa.eflint".
+
++dataset(D1).
++member(STa).
++person(Eve).
++project(P1).
++affiliated-with(Eve,STa).
+observe-data-misuse(EC,Eve,D1,P1).
+Terminate-selected(EC,Eve,D1).

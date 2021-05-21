@@ -1,7 +1,5 @@
 #include "gdpr/dipg_specialization.eflint".
 
-// 5.7 b) 
-
 Act observe-data-misuse
   Actor ecommittee
   Recipient researcher
@@ -9,7 +7,7 @@ Act observe-data-misuse
   Creates terminate-access()
   Holds when approved(project, researcher) When member(researcher)
           ,approved(project, member) When affiliated-with(researcher,member)
-    
+
 Act terminate-access
   Actor ecommittee
   Recipient researcher
