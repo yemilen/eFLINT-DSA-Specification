@@ -1,0 +1,15 @@
+#require "dsa.eflint". 
+#require "mahiru.eflint". 
+
+// The purpose for processing by the consumer is the approved project
+// this is derived from the fact that the approved project is recognised as a project by rule below
+
+Extend Fact purpose Derived from letter-of-approval-signed.project
+
+
+// Allow access to third-parties when permission is given by committee
+Extend Fact may-access // TODO, how to refer to actor?
+  // rule below assumes individual researchers are not considered as researchers, just 'members'
+  // site, asset
+  Holds when written-consent(thirdparty=site,researcher=site',dataset=asset) When owner-of(site', asset)
+

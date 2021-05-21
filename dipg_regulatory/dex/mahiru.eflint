@@ -1,0 +1,14 @@
+Fact site
+
+Fact asset Derived from data.asset, compute.asset, collection.asset
+
+Fact data Identified by asset
+Fact compute Identified by asset
+Fact collection Identified by asset
+Fact in-collection Identified by asset * collection Where collection
+
+// initialised as part of workflow to plan construction
+Fact owner-of Identified site * asset
+
+// permission
+Fact may-access Identified by asset * site
