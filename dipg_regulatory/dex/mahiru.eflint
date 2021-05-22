@@ -10,5 +10,10 @@ Fact in-collection Identified by asset * collection Where collection
 // initialised as part of workflow to plan construction
 Fact owner-of Identified by site * asset
 
-// permission
+Act access
+  Actor site
+  Recipient site'
+  Related to asset Where owner-of(site',asset)
+
 Fact may-access Identified by asset * site
+  Holds when Enabled(access())

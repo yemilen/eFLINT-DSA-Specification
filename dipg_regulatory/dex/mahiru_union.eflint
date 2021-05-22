@@ -18,7 +18,7 @@ Extend Fact owner-of Derived from owner-of(local-site.site, asset)
 // }
 
 // Allow access to an asset when it is been selected for a project that has been approved and consent has been given
-Extend Fact may-access // params: site, asset
+Extend Act access // params: site, site', asset
   Holds when (Exists project: 
         approved(member=site,project=project)
     &&  selected(dataset=asset,project=project)
@@ -29,14 +29,9 @@ Fact derived-consent Identified by subject * controller * purpose
   Holds when consent(subject,controller,purpose)
             ,project(purpose) && consent(subject,controller,DIPGResearch)
 
-// Alternative handling of consent:
-// Restrict access modularly with the condition of consent for DIPGResearch (requires may-access being an act) 
-// Extend Act may-access // params:site, asset
-//  Conditioned by consent(controller=local-site, data=asset, purpose=DIPGResearch)
-
 // Allow access to third-parties when permission is given by committee
-Extend Fact may-access // params: site, asset
-  Holds when written-consent(thirdparty=site,researcher=site',dataset=asset) When owner-of(site', asset)
+Extend Act access // params: site, site', asset
+  Holds when written-consent(thirdparty=site,researcher=site',dataset=asset)
 
 // Extend `project` with a derivation rule such that every approved project is a project
 // This way projects do not have to be created explicitly

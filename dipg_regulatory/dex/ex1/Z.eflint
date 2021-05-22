@@ -13,3 +13,5 @@
 +subject-of(donor,data).
 
 #require "P1.eflint".
+
+?!may-access.

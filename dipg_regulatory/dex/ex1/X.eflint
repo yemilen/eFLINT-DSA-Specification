@@ -17,3 +17,5 @@
 
 // updates received from DIPG registry server, in this case relating to project P1
 #require "P1.eflint".
+
+?!may-access.
