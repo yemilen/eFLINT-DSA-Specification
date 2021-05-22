@@ -1,16 +1,19 @@
 #require "../mahiru_union.eflint".
 
+// initialisation based on site information
++local-site(X).
++data(DX1).
++data(DX2).
+
+// initialisation based on consortium info
 +member(X).
 +member(Y).
 +member(Z).
 
-+local-site(X).
-
-+data(DX1).
-+data(DX2).
-
+// initialisation based on local donor information
 +donor(Xander). give-consent(Xander,X,DIPGResearch).
 +donor(Xandra). give-consent(Xandra,X,DIPGResearch).
 +subject-of(donor,data).
 
+// updates received from DIPG registry server, in this case relating to project P1
 #require "P1.eflint".
