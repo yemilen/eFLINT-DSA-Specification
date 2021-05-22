@@ -1,0 +1,15 @@
+#require "../mahiru_union.eflint".
+
++member(X).
++member(Y).
++member(Z).
+
++local-site(Z).
+
++data(DZ1).
++data(DZ2).
+
++donor(Zara). // no consent given
++subject-of(donor,data).
+
+#require "P1.eflint".

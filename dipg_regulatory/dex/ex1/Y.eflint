@@ -1,0 +1,16 @@
+#require "../mahiru_union.eflint".
+
++member(X).
++member(Y).
++member(Z).
+
++local-site(Y).
+
++data(DY1).
++data(DY2).
+
++donor(Ylmaz). give-consent(Ylmaz,Y,DIPGResearch).
++donor(Yuri). give-consent(Yuri,Y,DIPGResearch).
++subject-of(donor,data).
+
+#require "P1.eflint".

@@ -22,7 +22,7 @@ Act approve-project
   Recipient member
   Related to project
   Creates approved(project, member)
-  Holds when ecommittee && member && proposal(member, project, project)
+  Holds when ecommittee && member && proposal(member, project, project) // TODO do we want to involve consent here?
 
 Fact approved Identified by project * member
 
@@ -68,11 +68,11 @@ Duty duty-to-use-data-for-project
 Act select-data // Article 5(9)
   Actor ecommittee // Article 5(9) does not state the actor explicitly (infered from definition of ecommittee)
   Recipient member
-  Related to project, dataset
+  Related to project, dataset Where ecommittee && member
   Creates selected(dataset, project)
   Terminates duty-to-select-data(ecommittee, member, project)
-//  Holds when ecommittee && member && letter-of-approval-signed(project, member)
-  Holds when duty-to-select-data(ecommittee, member, project)
+  Holds when letter-of-approval-signed(project, member)
+//  Holds when duty-to-select-data(ecommittee, member, project)
 
 Fact selected Identified by dataset * project
 Act send-data

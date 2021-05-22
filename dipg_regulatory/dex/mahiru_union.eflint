@@ -1,15 +1,45 @@
-#require "dsa.eflint". 
+#require "../dsa.eflint". 
 #require "mahiru.eflint". 
 
-// The purpose for processing by the consumer is the approved project
-// this is derived from the fact that the approved project is recognised as a project by rule below
+// Every member has/is a site
+// This rule derives top-down: adding a member to the K.B. also adds a site
+Fact site Derived from member
 
-Extend Fact purpose Derived from letter-of-approval-signed.project
+// Every data asset is a dataset
+// This rule derives bottom-up: adding an data asset (Mahiru concept) to the K.B. also adds a dataset (DIPG concept)
+Fact dataset Derived from data.asset 
+
+// `local-site` indicates on which site 'this' eflint instance is running
+Fact local-site Identified by site
+
+// the `local-site` is the owner of the local assets
+Extend Fact owner-of Derived from owner-of(local-site.site, asset) 
+
+// Allow access to an asset when it is been selected for a project that has been approved
+Extend Fact may-access // params: site, asset
+  Holds when 
+  (Exists project: 
+        approved(member=site,project=project)
+    &&  selected(dataset=asset,project=project)
+    && (Forall donor: derived-consent(controller=local-site.site,subject=donor,purpose=project)))
+
+// The below implements policy that states 'consent for DIPGResearch is consent for all DIPG projects'
+Fact derived-consent Identified by subject * controller * purpose
+  Holds when consent()
+            ,project(purpose) && consent(purpose=DIPGResearch)
+
+// Restrict access to those datasets for which the donors have given consent
+// Extend Act may-access // params:site, asset
+//  Conditioned by consent(controller=local-site, data=asset, purpose=DIPGResearch)
+
 
 
 // Allow access to third-parties when permission is given by committee
-Extend Fact may-access // TODO, how to refer to actor?
-  // rule below assumes individual researchers are not considered as researchers, just 'members'
-  // site, asset
+Extend Fact may-access // params: site, asset
   Holds when written-consent(thirdparty=site,researcher=site',dataset=asset) When owner-of(site', asset)
+
+// Extend `project` to a derived type: every approved project is a project
+// This way projects do not have to be created explicitly
+Extend Fact project Derived from approved.project
+
 

@@ -1,0 +1,46 @@
+
+---
+Abstract DIPG data exchange scenario
+---
+
+Each site adheres to the DIPG regulatory document (and thereby GDPR).
+Each site has an eflint server running locally, loaded with formal interpretation of DIPG regulatory document.
+Each site has an application that:
+  * is used to get approval for projects
+  * is notified of accepted projects
+  * allows donors/patients to give and withdraw consent
+  * enables submitting algorithms for analysis on distributed data held by sites
+The eflint server is notified of events in the application, causing MayAccess rules to be (re-)generated
+
+---
+Concrete DIPG scenario
+---
+Three sites: X, Y, Z
+
+X, Y, Z have one data asset each: DX, DY, DZ
+all donors identifiable in DX, DY, DZ have given their consent (for DIPG research)
+
+X gets approval for a project that involves running algorithm A
+X,Y,Z are notified
+
+researcher at X submits algorithm A (alternative: submits algorithm B, which has not been approved)
+this creates workflow in which:
+  * assets of members are merged
+  * algorithm is applied (where do algorithm and data meet? which site? neutral 'location'?)
+  * findings are sent to all sites
+plan is constructed based on workflow and executed (when possible)
+
+...
+X, Y, Z collect new data (possibly involving new donors, with consent)
+...
+
+some donor at Y withdraws consent (alternative: do we also want to handle withdrawals of consent *while* a plan is being executed?)
+
+researcher at X submits algorithm A again
+
+options:
+  * DY is not included in merge, resulting in viable plan
+  * DY needs to be included, no viable plan possible
+  * DY is processed to remove data from respective donor creating DY', which can be used in plan
+  * ...
+(these options correspond to alternative workflows)

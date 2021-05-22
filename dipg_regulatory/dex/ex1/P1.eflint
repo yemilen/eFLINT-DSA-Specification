@@ -1,0 +1,11 @@
+
+propose-project(X,EC,P1).
+approve-project(EC,X,P1).
+send-letter-of-approval(DIPG,X,P1). // should be DCOG?
+sign-letter-of-approval(X,EC,P1).
+
+// DY1,DY2 has been selected for project P1
+select-data(EC,X,P1,DY2).
+select-data(EC,X,P1,DY1).
+// DZ1 has been selected for project P1
+select-data(EC,X,P1,DZ1).

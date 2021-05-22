@@ -8,7 +8,7 @@ Fact collection Identified by asset
 Fact in-collection Identified by asset * collection Where collection
 
 // initialised as part of workflow to plan construction
-Fact owner-of Identified site * asset
+Fact owner-of Identified by site * asset
 
 // permission
 Fact may-access Identified by asset * site
