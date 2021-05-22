@@ -4,6 +4,7 @@
 +local-site(X).
 +data(DX1).
 +data(DX2).
++domain(".co.uk").
 
 // initialisation based on consortium info
 +member(X).
@@ -18,4 +19,5 @@
 // updates received from DIPG registry server, in this case relating to project P1
 #require "P1.eflint".
 
+// no access for any site (ownership not being considered in current example)
 ?!may-access.
