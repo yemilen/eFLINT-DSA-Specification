@@ -1,13 +1,13 @@
 Fact site
 
-Fact asset Derived from data.asset, compute.asset, collection.asset
+Fact asset Derived from data-asset, compute-asset, collection-asset
 
-Fact data Identified by asset
-Fact compute Identified by asset
-Fact collection Identified by asset
-Fact in-collection Identified by asset * collection Where collection
+Fact data-asset 
+Fact compute-asset
+Fact collection-asset
+Fact in-collection Identified by asset * collection-asset
 
-// initialised as part of workflow to plan construction
+// TODO derive `owner-of` instances from `in-collection` instances
 Fact owner-of Identified by site * asset
 
 Act access

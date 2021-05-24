@@ -1,8 +1,8 @@
-#require "../mahiru_union.eflint".
+#require "../mahiru_decentral.eflint".
 
 +local-site(Y).
-+data(DY1).
-+data(DY2).
++data-asset(DY1).
++data-asset(DY2).
 +domain(".nl").
 
 +member(X).

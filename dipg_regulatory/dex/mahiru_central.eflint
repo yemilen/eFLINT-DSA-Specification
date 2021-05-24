@@ -1,0 +1,22 @@
+#require "mahiru_union.eflint".
+
+// Effects of making data available at Mahiru-level
+Extend Act make-data-available
+  Creates data-asset(dataset)
+         ,owner-of(dcog,dataset)
+
+// Selection of data for a project creates a collection for that project and adds the selected data to it
+Extend Act select-data // ecommittee, member, project, dataset
+  Creates in-collection(dataset,project)
+         ,collection-asset(project)
+         ,owner-of(dcog,project)
+
+// A member can access selected data as a collection when it is selected for their approved project
+Extend Act access // site, site', asset
+  Holds when project(asset) && approved(asset,site) && collection-asset(asset) 
+
+// Extend `project` with a derivation rule such that every approved project is a project
+// This way projects do not have to be created explicitly
+Extend Fact project Derived from approved.project
+
+

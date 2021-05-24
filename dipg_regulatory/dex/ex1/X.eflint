@@ -1,9 +1,9 @@
-#require "../mahiru_union.eflint".
+#require "../mahiru_decentral.eflint".
 
 // initialisation based on site information
 +local-site(X).
-+data(DX1).
-+data(DX2).
++data-asset(DX1).
++data-asset(DX2).
 +domain(".co.uk").
 
 // initialisation based on consortium info

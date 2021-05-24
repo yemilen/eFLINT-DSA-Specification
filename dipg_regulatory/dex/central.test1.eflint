@@ -1,0 +1,20 @@
+#include "mahiru_central.eflint".
+
++member(X). +coded(X1). +coded(X2).
++member(Y).
++donor(Xavier).
++donor(Xandra).
+
+give-consent(Xavier,X,DIPGResearch).
+give-consent(Xandra,X,DIPGResearch).
+
+make-data-available(member=X,dataset=X1).
+make-data-available(member=X,dataset=X2).
+
+propose-project(Y,EC,P1).
+approve-project(EC,Y,P1).
+send-letter-of-approval(DIPG,Y,P1). // should be DCOG?
+sign-letter-of-approval(Y,EC,P1).
+select-data(EC,Y,P1,X1).
+select-data(EC,Y,P1,X2).
+?may-access(asset(P1),Y).

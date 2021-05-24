@@ -1,8 +1,8 @@
-#require "../mahiru_union.eflint".
+#require "../mahiru_decentral.eflint".
 
 +local-site(Z).
-+data(DZ1).
-+data(DZ2).
++data-asset(DZ1).
++data-asset(DZ2).
 +domain(".it").
 
 +member(X).

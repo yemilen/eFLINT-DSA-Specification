@@ -1,0 +1,29 @@
+#require "mahiru_union.eflint". 
+
+// `local-site` indicates on which site 'this' eflint instance is running
+Fact local-site Identified by site
+
+// Rule: the `local-site` is the owner of the local assets
+Extend Fact owner-of Derived from owner-of(local-site.site, asset) 
+
+// Allow access to an asset when it is been selected for a project that has been approved and consent has been given
+Extend Act access // params: site, site', asset
+  Holds when (Exists project: 
+        approved(member=site,project=project)
+    &&  selected(dataset=asset,project=project)
+    && (Forall donor: derived-consent(controller=local-site.site,subject=donor,purpose=project)))
+
+// The below implements policy that states 'consent for DIPGResearch is consent for all DIPG projects'
+Fact derived-consent Identified by subject * controller * purpose
+  Holds when consent(subject,controller,purpose)
+            ,project(purpose) && consent(subject,controller,DIPGResearch)
+
+// Allow access to third-parties when permission is given by committee
+Extend Act access // params: site, site', asset
+  Holds when written-consent(thirdparty=site,researcher=site',dataset=asset)
+
+// Extend `project` with a derivation rule such that every approved project is a project
+// This way projects do not have to be created explicitly
+Extend Fact project Derived from approved.project
+
+
