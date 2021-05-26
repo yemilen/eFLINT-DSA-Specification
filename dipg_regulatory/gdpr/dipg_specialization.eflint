@@ -17,11 +17,3 @@ Act make-data-available
   Related to dataset
   Conditioned by coded(dataset)
   Holds when member && ecommittee
-
-//TODO:
-// replace with extension that synchs `make-data-available` with `collect-personal-data` act of GDPR
-Extend Act make-data-available
-  Conditioned by (Forall donor: 
-    consent(controller=member,subject=donor,purpose=DIPGResearch) 
-      When subject-of(donor,dataset))
-  Creates processes(controller=member,processor=dcog,data=dataset,purpose=DIPGResearch) 

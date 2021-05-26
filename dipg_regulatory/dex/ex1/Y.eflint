@@ -1,19 +1,26 @@
 #require "../mahiru_decentral.eflint".
 
+// 1. initialisation based on site information
 +local-site(Y).
 +data-asset(DY1).
 +data-asset(DY2).
 +domain(".nl").
 
+// 2. initialisation based on consortium info
 +member(X).
 +member(Y).
 +member(Z).
 
-
+// 3. initialisation based on local donor information
 +donor(Ylmaz). give-consent(Ylmaz,Y,DIPGResearch).
 +donor(Yuri). give-consent(Yuri,Y,DIPGResearch).
 +subject-of(donor,data).
 
+// 4. updates received from DIPG registry server, in this case that project P1 is approved for member X
 #require "P1.eflint".
 
+// 5. access for X 
 ?(Forall data: may-access(data.asset,X)).
+// X --> approved project, data selected for project, consent has been given
+// Y --> (ownership not being considered in current example)
+// Z --> data not selected for any approved project

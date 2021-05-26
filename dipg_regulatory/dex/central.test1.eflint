@@ -1,20 +1,41 @@
 #include "mahiru_central.eflint".
 
-+member(X). +coded(X1). +coded(X2).
+// 1. configuration/initialisation of DIPG registry
++member(X).
 +member(Y).
-+donor(Xavier).
-+donor(Xandra).
 
 give-consent(Xavier,X,DIPGResearch).
 give-consent(Xandra,X,DIPGResearch).
 
-make-data-available(member=X,dataset=X1).
-make-data-available(member=X,dataset=X2).
+// 2a. following information 'magically' extracted from the dataset 
++coded(X1).
++donor(Xavier).
++donor(Xandra).
++subject-of(Xavier,X1).
++subject-of(Xandra,X1).
++accurate-for-purpose(X1, DIPGResearch).
 
+// 2b. in order to allow the transfer of X1 to the DIPG registry 
+make-data-available(member=X,dataset=X1). // syncs with `collect-personal-data(X,donor,X1,DCOG,DIPGResearch)` (for all donors)
+
+// 3a. following information 'magically' extracted from the dataset 
++coded(X2).
++donor(Xavier).
++donor(Xandra).
++subject-of(Xavier,X2).
++subject-of(Xandra,X2).
++accurate-for-purpose(X2, DIPGResearch).
+
+// 3b. in order to allow the transfer of X2 to the DIPG registry
+make-data-available(member=X,dataset=X2). // syncs with `collect-personal-data(X,donor,X2,DCOG,DIPGResearch)` (for all donors)
+
+// 4. project P1 by Y is proposed and then approved
 propose-project(Y,EC,P1).
 approve-project(EC,Y,P1).
 send-letter-of-approval(DIPG,Y,P1). // should be DCOG?
 sign-letter-of-approval(Y,EC,P1).
 select-data(EC,Y,P1,X1).
 select-data(EC,Y,P1,X2).
+
+// 5. selection of X1 and X2 creates collection `asset(P1)` and access for Y is inferred from projects' approval 
 ?may-access(asset(P1),Y).

@@ -1,13 +1,14 @@
 #require "../dsa.eflint". 
 #require "mahiru.eflint". 
 
-// Every member has/is a site
+// 1. Every member has/is a site
 // This rule derives top-down: adding a member to the K.B. also adds a site
 // and DCOG is a site
 Fact site Derived from member, dcog
 
-// Every data-asset is a dataset
+// 2. Every data-asset is a dataset
 // This rule derives bottom-up: adding a data-asset (Mahiru concept) to the K.B. also adds a dataset (DIPG concept)
 Fact dataset Derived from data-asset 
 
-
+// 3. For simplicity: An approved project is recognised as a project
+Extend Fact project Derived from approved.project

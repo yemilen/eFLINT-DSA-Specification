@@ -1,22 +1,27 @@
 #require "mahiru_union.eflint".
 
-// Effects of making data available at Mahiru-level
+// 1. Making data available to the DIPG registry creates an asset with ownership for DCOG
 Extend Act make-data-available
   Creates data-asset(dataset)
          ,owner-of(dcog,dataset)
 
-// Selection of data for a project creates a collection for that project and adds the selected data to it
+// 2. Making data-available is akin to collecting personal data with DCOG as processor
+Extend Act make-data-available // member, dcog, dataset
+  Syncs with (Foreach donor: collect-personal-data(controller = member
+                                                  ,subject = donor
+                                                  ,data = dataset
+                                                  ,processor = dcog  
+                                                  ,purpose = DIPGResearch)
+                              When subject-of(donor, dataset))
+
+// 3. Selecting data for a project creates a collection for that project with the selected data in it 
+//    Selecting data is only enabled when the DCOG owns the data (i.e. it is in the DIPG Registry)
 Extend Act select-data // ecommittee, member, project, dataset
+  Conditioned by owner-of(dcog, dataset)
   Creates in-collection(dataset,project)
          ,collection-asset(project)
          ,owner-of(dcog,project)
 
-// A member can access selected data as a collection when it is selected for their approved project
+// 4. A member can access a collection when it is selected for an approved project
 Extend Act access // site, site', asset
-  Holds when project(asset) && approved(asset,site) && collection-asset(asset) 
-
-// Extend `project` with a derivation rule such that every approved project is a project
-// This way projects do not have to be created explicitly
-Extend Fact project Derived from approved.project
-
-
+  Holds when collection-asset(asset), project(asset) && approved(asset,site) 

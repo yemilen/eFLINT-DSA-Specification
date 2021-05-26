@@ -1,23 +1,26 @@
 #require "../mahiru_decentral.eflint".
 
-// initialisation based on site information
+// 1. initialisation based on site information
 +local-site(X).
 +data-asset(DX1).
 +data-asset(DX2).
 +domain(".co.uk").
 
-// initialisation based on consortium info
+// 2. initialisation based on consortium info
 +member(X).
 +member(Y).
 +member(Z).
 
-// initialisation based on local donor information
+// 3. initialisation based on local donor information
 +donor(Xander). give-consent(Xander,X,DIPGResearch).
 +donor(Xandra). give-consent(Xandra,X,DIPGResearch).
 +subject-of(donor,data).
 
-// updates received from DIPG registry server, in this case relating to project P1
+// 4. updates received from DIPG registry server, in this case that project P1 is approved for member X
 #require "P1.eflint".
 
-// no access for any site (ownership not being considered in current example)
+// 5. no access for any site 
 ?!may-access.
+// X --> (ownership not being considered in current example)
+// Y --> data not selected for any approved project
+// Z --> data not selected for any approved project
