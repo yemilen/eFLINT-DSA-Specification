@@ -5,16 +5,7 @@ Extend Act make-data-available
   Creates data-asset(dataset)
          ,owner-of(dcog,dataset)
 
-// 2. Making data-available is akin to collecting personal data with DCOG as processor
-Extend Act make-data-available // member, dcog, dataset
-  Syncs with (Foreach donor: collect-personal-data(controller = member
-                                                  ,subject = donor
-                                                  ,data = dataset
-                                                  ,processor = dcog  
-                                                  ,purpose = DIPGResearch)
-                              When subject-of(donor, dataset))
-
-// 3. Selecting data for a project creates a collection for that project with the selected data in it 
+// 2. Selecting data for a project creates a collection for that project with the selected data in it 
 //    Selecting data is only enabled when the DCOG owns the data (i.e. it is in the DIPG Registry)
 Extend Act select-data // ecommittee, member, project, dataset
   Conditioned by owner-of(dcog, dataset)
@@ -22,6 +13,6 @@ Extend Act select-data // ecommittee, member, project, dataset
          ,collection-asset(project)
          ,owner-of(dcog,project)
 
-// 4. A member can access a collection when it is selected for an approved project
+// 3. A member can access a collection when it is selected for an approved project
 Extend Act access // site, site', asset
-  Holds when collection-asset(asset), project(asset) && approved(asset,site) 
+  Holds when collection-asset(asset) && project(asset) && approved(asset,site) 

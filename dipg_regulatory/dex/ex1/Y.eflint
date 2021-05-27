@@ -20,7 +20,7 @@
 #require "P1.eflint".
 
 // 5. access for X 
-?(Forall data: may-access(data.asset,X)).
+?(Forall data-asset: may-access(data-asset,X)).
 // X --> approved project, data selected for project, consent has been given
 // Y --> (ownership not being considered in current example)
 // Z --> data not selected for any approved project
