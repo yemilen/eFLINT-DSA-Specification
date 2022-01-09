@@ -16,4 +16,4 @@ Act access
   Related to asset Where owner-of(site',asset)
 
 Fact may-access Identified by asset * site
-  Holds when Enabled(access())
+  Holds when access()
